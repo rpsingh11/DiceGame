@@ -1,14 +1,27 @@
-var player1 = Math.floor((Math.random() * Math.floor(6))+1);
-var player2 = Math.floor((Math.random() * Math.floor(6))+1);
-
-function imagesGenerator(player,imgName){
-  return document.querySelector(player).setAttribute("src", "./images/"+imgName);
+function rollDice() {
+  let player1 = Math.ceil(Math.random() * 6);
+  let player2 = Math.ceil(Math.random() * 6);
+  image(player1, ".img1");
+  image(player2, ".img2");
+  if (player1 > player2) {
+    document.querySelector("h2").textContent = "Player 1 Wins 🎈";
+  } else if (player2 > player1) {
+    document.querySelector("h2").textContent = "Player 2 Wins🎈";
+  } else {
+    document.querySelector("h2").textContent = "Match Draw";
+  }
 }
-function image(playerNumber,img){
+
+function imagesGenerator(player, imgName) {
+  return document
+    .querySelector(player)
+    .setAttribute("src", "./images/" + imgName);
+}
+function image(playerNumber, img) {
   switch (playerNumber) {
     case 1:
-    imagesGenerator(img, "dice1.png");
-    break;
+      imagesGenerator(img, "dice1.png");
+      break;
     case 2:
       imagesGenerator(img, "dice2.png");
       break;
@@ -26,15 +39,7 @@ function image(playerNumber,img){
       break;
   }
 }
-image(player1,".img1");
-image(player2,".img2");
 
-if(player1 > player2){
-  document.querySelector('h1').textContent ="Player 1 Wins 🎈";
-}
-else if(player2 > player1){
-  document.querySelector('h1').textContent ="Player 2 Wins🎈";
-}
-else{
-  document.querySelector('h1').textContent ="Match Draw";
-}
+rollDice();
+let btn = document.getElementById("roll");
+btn.addEventListener("click", rollDice);
